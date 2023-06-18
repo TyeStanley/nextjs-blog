@@ -12,7 +12,8 @@ export default function Navbar() {
   const handleShowDropdown = () => setShowDropdown(prev => true);
   const handleHideDropdown = () => setShowDropdown(prev => false);
 
-  const loggedIn = true;
+  const loggedIn = false;
+
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
@@ -54,7 +55,7 @@ export default function Navbar() {
           ) : (
             <>
               <button className={classes.login}>Log in</button>
-              <link href="/register">Register</link>
+              <Link href="/register">Register</Link>
             </>
           )}
         </ul>
