@@ -25,6 +25,9 @@ export default function BlogCard({ blog: { title, desc, img } }) {
           <div className={classes.left}>
             <h3>{title}</h3>
             <p>{desc}</p>
+            <span>
+              Created By: <span>1th of January</span>
+            </span>
           </div>
           <div className={classes.right}>
             {12}{" "}
