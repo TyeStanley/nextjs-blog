@@ -21,7 +21,6 @@ export async function POST(req) {
       email,
       password: hashedPassword
     });
-    console.log(_doc);
     // ._doc => the values of the user
     const { password, ...user } = newUser._doc;
 
