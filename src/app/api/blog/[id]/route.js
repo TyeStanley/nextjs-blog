@@ -19,6 +19,43 @@ export async function GET(req, ctx) {
   }
 }
 
-export async function PUT(req) {}
+export async function PUT(req, ctx) {
+  await db.connect();
+
+  const id = ctx.params.id;
+  const accessToken = req.headers.get("authorization");
+  const token = accessToken.split(" ")[1];
+
+  const decodedToken = verifyJwtToken(token);
+
+  if (!accessToken || !decodedToken) {
+    return new Response(
+      JSON.stringify({ error: "unauthorized (wrong or expired token)" }),
+      { status: 403 }
+    );
+  }
+
+  try {
+    const body = await req.json();
+    const blog = await Blog.findById(id).populate("authorId");
+
+    if (blog?.authorId?._id.toString() !== decodedToken._id.toString()) {
+      return new Response(
+        JSON.stringify({ msg: "Only author can update the blog" }),
+        { status: 403 }
+      );
+    }
+
+    const updatedBlog = await Blog.findByIdAndUpdate(
+      id,
+      { $set: { ...body } },
+      { new: true }
+    );
+
+    return new Response(JSON.stringify(updatedBlog), { status: 200 });
+  } catch (error) {
+    return new Response(JSON.stringify(null), { status: 500 });
+  }
+}
 
 export async function DELETE(req) {}
