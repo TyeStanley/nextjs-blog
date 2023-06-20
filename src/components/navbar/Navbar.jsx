@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import classes from "./navbar.module.css";
 import person from "../../../public/person.jpg";
 import { AiOutlineClose } from "react-icons/ai";
+import { signIn, signOut } from "next-auth/react";
 
 export default function Navbar() {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -37,7 +38,10 @@ export default function Navbar() {
                     onClick={handleHideDropdown}
                   />
                   <button
-                    onClick={handleHideDropdown}
+                    onClick={() => {
+                      signOut();
+                      handleHideDropdown();
+                    }}
                     className={classes.logout}
                   >
                     Logout
@@ -54,7 +58,14 @@ export default function Navbar() {
             </div>
           ) : (
             <>
-              <button className={classes.login}>Log in</button>
+              <button
+                onClick={() => {
+                  signIn();
+                }}
+                className={classes.login}
+              >
+                Log in
+              </button>
               <Link href="/register">Register</Link>
             </>
           )}
