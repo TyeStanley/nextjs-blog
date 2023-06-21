@@ -15,6 +15,8 @@ const handler = NextAuth({
       async authorize(credentials, req) {
         const { email, password } = credentials;
 
+        await db.connect();
+
         const user = await User.findOne({ email });
 
         if (!user) {
