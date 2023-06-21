@@ -5,15 +5,14 @@ import React, { useState } from "react";
 import classes from "./navbar.module.css";
 import person from "../../../public/person.jpg";
 import { AiOutlineClose } from "react-icons/ai";
-import { signIn, signOut } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function Navbar() {
   const [showDropdown, setShowDropdown] = useState(false);
+  const { data: session } = useSession();
 
   const handleShowDropdown = () => setShowDropdown(prev => true);
   const handleHideDropdown = () => setShowDropdown(prev => false);
-
-  const loggedIn = false;
 
   return (
     <div className={classes.container}>
@@ -22,7 +21,7 @@ export default function Navbar() {
           <Link href="/">My Blog</Link>
         </h2>
         <ul className={classes.right}>
-          {loggedIn ? (
+          {session?.user ? (
             <div>
               <Image
                 onClick={handleShowDropdown}
