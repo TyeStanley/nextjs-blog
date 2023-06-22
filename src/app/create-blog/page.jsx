@@ -29,6 +29,38 @@ export default function CreateBlog() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    if (!photo || !title || !desc) {
+      toast.error("Please fill all the fields!");
+      return;
+    }
+
+    try {
+      const imageUrl = await uploadImage();
+
+      const res = await fetch(`http://localhost:3000/api/blog`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${session.accessToken}`
+        },
+        method: "POST",
+        body: JSON.stringify({
+          title,
+          desc,
+          category,
+          imageUrl,
+          authorId: session?.user?._id
+        })
+      });
+
+      if (!res.ok) throw new Error("Something went wrong!");
+
+      const blog = await res.json();
+
+      router.push(`/blog/${blog?._id}`);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async function uploadImage(e) {
@@ -47,6 +79,12 @@ export default function CreateBlog() {
           body: formData
         }
       );
+
+      const data = await res.json();
+
+      const imageUrl = data["secure_url"];
+
+      return imageUrl;
     } catch (error) {
       console.log(error);
     }
@@ -84,6 +122,7 @@ export default function CreateBlog() {
             style={{ display: "none" }}
             onChange={e => setPhoto(e.target.files[0])}
           />
+          <button className={classes.createBlog}>Create</button>
         </form>
       </div>
       <ToastContainer />
