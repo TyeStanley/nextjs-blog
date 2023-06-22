@@ -57,7 +57,7 @@
   color: #efefef;
 }
 
-.loginNow {
+.registerNow {
   background-color: transparent;
   outline: none;
   border: none;
@@ -68,6 +68,6 @@
   transition: 150ms;
 }
 
-.loginNow:hover {
+.registerNow:hover {
   color: #555;
 }
