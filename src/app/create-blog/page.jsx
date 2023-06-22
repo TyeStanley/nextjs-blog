@@ -8,6 +8,9 @@ import "react-toastify/dist/ReactToastify.css";
 import classes from "./createBlog.module.css";
 
 export default function CreateBlog() {
+  const CLOUD_NAME = "djallaxyw";
+  const UPLOAD_PRESET = "my_blog_project_nextjs";
+
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [category, setCategory] = useState("Nature");
@@ -28,7 +31,26 @@ export default function CreateBlog() {
     e.preventDefault();
   }
 
-  async function uploadImage(e) {}
+  async function uploadImage(e) {
+    if (!photo) return;
+
+    const formData = new FormData();
+
+    formData.append("file", photo);
+    formData.append("upload_preset", UPLOAD_PRESET);
+
+    try {
+      const res = await fetch(
+        `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
+        {
+          method: "POST",
+          body: formData
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
