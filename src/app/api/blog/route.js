@@ -30,7 +30,7 @@ export async function POST(req) {
   }
 
   try {
-    const body = await req.json(body);
+    const body = await req.json();
     const newBlog = await Blog.create(body);
 
     return new Response(JSON.stringify(newBlog), { status: 201 });

@@ -1,5 +1,5 @@
 "use client";
-import { useRouter } from "next/navgiation";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { AiOutlineFileImage } from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
@@ -41,7 +41,7 @@ export default function CreateBlog() {
       const res = await fetch(`http://localhost:3000/api/blog`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${session.accessToken}`
+          "Authorization": `Bearer ${session?.user?.accessToken}`
         },
         method: "POST",
         body: JSON.stringify({
@@ -57,13 +57,15 @@ export default function CreateBlog() {
 
       const blog = await res.json();
 
+      console.log(`Blog from res.json(): ${blog}`);
+
       router.push(`/blog/${blog?._id}`);
     } catch (error) {
       console.log(error);
     }
   }
 
-  async function uploadImage(e) {
+  async function uploadImage() {
     if (!photo) return;
 
     const formData = new FormData();
