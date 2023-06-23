@@ -57,8 +57,6 @@ export default function CreateBlog() {
 
       const blog = await res.json();
 
-      console.log(`Blog from res.json(): ${blog}`);
-
       router.push(`/blog/${blog?._id}`);
     } catch (error) {
       console.log(error);
