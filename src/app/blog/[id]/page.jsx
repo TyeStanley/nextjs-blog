@@ -49,7 +49,28 @@ export default function BlogDetails(ctx) {
     }
   }
 
-  async function handleLike() {}
+  async function handleLike() {
+    try {
+      const res = await fetch(`http://localhost:3000/api/blog/${_id}/like`, {
+        headers: {
+          "Authorization": `Bearer ${session?.user?.accessToken}`
+        },
+        method: "PUT"
+      });
+
+      if (res.ok) {
+        if (isLiked) {
+          setIsLiked(prev => !prev);
+          setBlogLikes(prev => prev - 1);
+        } else {
+          setIsLiked(prev => !prev);
+          setBlogLikes(prev => prev + 1);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
