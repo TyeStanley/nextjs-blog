@@ -51,7 +51,7 @@ export default function BlogDetails(ctx) {
 
   async function handleLike() {
     try {
-      const res = await fetch(`http://localhost:3000/api/blog/${_id}/like`, {
+      const res = await fetch(`http://localhost:3000/api/blog/${ctx.params.id}/like`, {
         headers: {
           "Authorization": `Bearer ${session?.user?.accessToken}`
         },
