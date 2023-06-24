@@ -26,8 +26,9 @@ const BlogSchema = new mongoose.Schema(
       ref: "User"
     },
     likes: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "User",
+      default: []
     }
   },
   { timestamps: true }

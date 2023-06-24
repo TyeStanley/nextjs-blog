@@ -1,11 +1,43 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./blogCard.module.css";
+import { useSession } from "next-auth/react";
 import { AiFillLike, AiOutlineLike } from "react-icons/ai";
 
-export default function BlogCard({ blog: { title, desc, img } }) {
-  const isLiked = true;
+export default function BlogCard({ blog: { title, desc, imageUrl, likes, authorId, _id } }) {
+  const { data: session } = useSession();
+  const [isLiked, setIsLiked] = useState(false);
+  const [blogLikes, setBlogLikes] = useState(0);
+
+  useEffect(() => {
+    session && likes && setIsLiked(likes.includes(session?.user?._id));
+    session && likes && setBlogLikes(likes.length);
+  }, [session, likes]);
+
+  async function handleLike() {
+    try {
+      const res = await fetch(`http://localhost:3000/api/blog/${_id}/like`, {
+        headers: {
+          "Authorization": `Bearer ${session?.user?.accessToken}`
+        },
+        method: "PUT"
+      });
+
+      if (res.ok) {
+        if (isLiked) {
+          setIsLiked(prev => !prev);
+          setBlogLikes(prev => prev - 1);
+        } else {
+          setIsLiked(prev => !prev);
+          setBlogLikes(prev => prev + 1);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className={classes.container}>
@@ -15,7 +47,7 @@ export default function BlogCard({ blog: { title, desc, img } }) {
           href="/"
         >
           <Image
-            src={img}
+            src={imageUrl}
             width="350"
             height="350"
             alt="temp"
@@ -30,8 +62,18 @@ export default function BlogCard({ blog: { title, desc, img } }) {
             </span>
           </div>
           <div className={classes.right}>
-            {12}{" "}
-            {isLiked ? <AiFillLike size={20} /> : <AiOutlineLike size={20} />}
+            {blogLikes}{" "}
+            {isLiked ? (
+              <AiFillLike
+                onClick={handleLike}
+                size={20}
+              />
+            ) : (
+              <AiOutlineLike
+                onClick={handleLike}
+                size={20}
+              />
+            )}
           </div>
         </div>
       </div>
