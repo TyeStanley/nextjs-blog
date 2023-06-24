@@ -6,6 +6,8 @@ import classes from "./blog.module.css";
 import { BsFillPencilFill } from "react-icons/bs";
 import { AiFillDelete, AiFillLike, AiOutlineLike } from "react-icons/ai";
 import Link from "next/link";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { format } from "timeago.js";
 import { useRouter } from "next/navigation";
 import person from "../../../../public/person.jpg";
@@ -88,7 +90,39 @@ export default function BlogDetails(ctx) {
     }
   }
 
-  async function handleComment() {}
+  async function handleComment() {
+    if (commentText?.length < 2) {
+      toast.error("Comment must be at least 2 characters long");
+      return;
+    }
+
+    try {
+      const body = {
+        blogId: ctx.params.id,
+        authorId: session?.user?._id,
+        text: commentText
+      };
+
+      const res = await fetch("http://localhost:3000/api/comment", {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${session?.user?.accessToken}`
+        },
+        method: "POST",
+        body: JSON.stringify(body)
+      });
+
+      const newComment = await res.json();
+
+      setComments(prev => {
+        return [newComment, ...prev];
+      });
+
+      setCommentText("");
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
@@ -164,21 +198,23 @@ export default function BlogDetails(ctx) {
             />
             <button onClick={handleComment}>Post</button>
           </div>
+
           <div className={classes.comments}>
             {comments?.length > 0 ? (
-              comments.map(comment => {
+              comments.map(comment => (
                 <Comment
                   key={comment._id}
                   comment={comment}
                   setComments={setComments}
-                />;
-              })
+                />
+              ))
             ) : (
-              <h4 className={classes.noComments}>No comments yet</h4>
+              <h4 className={classes.noComments}>No comments. Be the first one to leave a comment!</h4>
             )}
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

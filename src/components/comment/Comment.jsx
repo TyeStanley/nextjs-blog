@@ -1,9 +1,10 @@
 import React from "react";
 import { useSession } from "next-auth/react";
 import { format } from "timeago.js";
-import Image from "next/image";
-import classes from "./comment.module.css";
+import person from "../../../public/person.jpg";
 import { BsTrash } from "react-icons/bs";
+import classes from "./comment.module.css";
+import Image from "next/image";
 
 export default function Comment({ comment, setComments }) {
   const { data: session } = useSession();
@@ -11,7 +12,7 @@ export default function Comment({ comment, setComments }) {
 
   async function handleDeleteComment() {
     try {
-      await fetch(`http://localhost:3000/api/comment/${comment?._id}`, {
+      await fetch(`https://blog-nextjs-13-sud5.vercel.app/api/comment/${comment?._id}`, {
         headers: {
           "Authorization": `Bearer ${token}`
         },
@@ -25,6 +26,7 @@ export default function Comment({ comment, setComments }) {
       console.log(error);
     }
   }
+
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
