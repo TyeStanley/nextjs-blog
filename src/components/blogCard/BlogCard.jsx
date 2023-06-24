@@ -44,7 +44,7 @@ export default function BlogCard({ blog: { title, desc, imageUrl, likes, authorI
       <div className={classes.wrapper}>
         <Link
           className={classes.imgContainer}
-          href="/"
+          href={`/blog/${_id}`}
         >
           <Image
             src={imageUrl}
