@@ -28,7 +28,26 @@ export default function BlogDetails(ctx) {
     session && fetchBlog();
   }, [session, ctx.params.id]);
 
-  async function handleDelete() {}
+  async function handleDelete() {
+    try {
+      const confirmModal = confirm("Are you sure you want to delete this blog?");
+
+      if (confirmModal) {
+        const res = await fetch(`http://localhost:3000/api/blog/${ctx.params.id}`, {
+          headers: {
+            "Authorization": `Bearer ${session?.user?.token}`
+          },
+          method: "DELETE"
+        });
+
+        if (res.ok) {
+          router.push("/");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async function handleLike() {}
   return (
