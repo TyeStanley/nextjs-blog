@@ -15,7 +15,7 @@ export default function Edit(ctx) {
   const [desc, setDesc] = useState("");
   const [category, setCategory] = useState("");
   const [photo, setPhoto] = useState("");
-  const [data: session] = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
 
   useEffect(() => {
