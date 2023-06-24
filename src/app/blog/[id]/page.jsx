@@ -7,13 +7,14 @@ import { BsFillPencilFill } from "react-icons/bs";
 import { AiFillDelete, AiFillLike, AiOutlineLike } from "react-icons/ai";
 import Link from "next/link";
 import { format } from "timeago.js";
+import { useRouter } from "next/navigation";
 
 export default function BlogDetails(ctx) {
   const [blogDetails, setBlogDetails] = useState("");
   const [isLiked, setIsLiked] = useState(false);
   const [blogLikes, setBlogLikes] = useState(0);
-
   const { data: session } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
     async function fetchBlog() {
@@ -22,7 +23,7 @@ export default function BlogDetails(ctx) {
 
       setBlogDetails(blog);
       setIsLiked(blog?.likes?.includes(session?.user?._id));
-      setBlogLikes(blog?.likes?.length);
+      setBlogLikes(blog?.likes?.length || 0);
     }
     session && fetchBlog();
   }, [session, ctx.params.id]);

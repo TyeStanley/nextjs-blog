@@ -1,0 +1,128 @@
+.container {
+  min-height: calc(100vh - 60px);
+  width: 100%;
+}
+
+.wrapper {
+  width: 85%;
+  height: 100%;
+  margin: 0 auto;
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wrapper > img {
+  object-fit: cover;
+  margin-bottom: 2.5rem;
+}
+
+.wrapper > .row {
+  padding: 0 1rem;
+  width: 750px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3.75rem;
+}
+
+.row > .title {
+  font-size: 36px;
+  color: #333;
+  text-transform: capitalize;
+}
+
+.row > span {
+  font-weight: bold;
+}
+
+.row > span > span {
+  font-weight: normal;
+  color: #666;
+  font-size: 15px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.editButton {
+  outline: none;
+  border: 1px solid transparent;
+  background-color: #3eda22;
+  color: #fff;
+  padding: 0.5rem 1.25rem;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  transition: 150ms;
+}
+
+.editButton:hover {
+  background-color: #fff;
+  border-color: #3eda22;
+  color: #3eda22;
+}
+
+.deleteButton {
+  outline: none;
+  border: 1px solid transparent;
+  background-color: #f00;
+  color: #fff;
+  padding: 0.5rem 1.25rem;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  transition: 150ms;
+}
+
+.deleteButton:hover {
+  background-color: #fff;
+  border-color: #f00;
+  color: #f00;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 20px;
+  color: #444;
+}
+
+.category {
+  width: 750px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1.25rem;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.category > span {
+  padding: 0.5rem 1.25rem;
+  background-color: #3eda22;
+  color: #fff;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+}
