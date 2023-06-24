@@ -198,7 +198,6 @@ export default function BlogDetails(ctx) {
             />
             <button onClick={handleComment}>Post</button>
           </div>
-
           <div className={classes.comments}>
             {comments?.length > 0 ? (
               comments.map(comment => (
