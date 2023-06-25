@@ -4,7 +4,7 @@ import Image from "next/image";
 import classes from "./page.module.css";
 
 export async function fetchBlogs() {
-  const res = await fetch("nextjs-blog-3r517no3p-tyestanley.vercel.app/api/blog", { cache: "no-store" });
+  const res = await fetch("https://nextjs-blog-3r517no3p-tyestanley.vercel.app/api/blog", { cache: "no-store" });
 
   return res.json();
 }
