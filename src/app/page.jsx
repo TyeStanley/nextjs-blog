@@ -4,9 +4,13 @@ import Image from "next/image";
 import classes from "./page.module.css";
 
 export async function fetchBlogs() {
-  const res = await fetch("https://nextjs-blog-3r517no3p-tyestanley.vercel.app/api/blog", { cache: "no-store" });
+  try {
+    const res = await fetch("http://localhost:3000/api/blog", { cache: "no-store" });
 
-  return res.json();
+    if (res.ok) return res.json();
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export default async function Home() {
