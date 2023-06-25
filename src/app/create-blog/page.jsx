@@ -38,7 +38,7 @@ export default function CreateBlog() {
     try {
       const imageUrl = await uploadImage();
 
-      const res = await fetch(`http://localhost:3000/api/blog`, {
+      const res = await fetch(`nextjs-blog-3r517no3p-tyestanley.vercel.app/api/blog`, {
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${session?.user?.accessToken}`
@@ -72,13 +72,10 @@ export default function CreateBlog() {
     formData.append("upload_preset", UPLOAD_PRESET);
 
     try {
-      const res = await fetch(
-        `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
-        {
-          method: "POST",
-          body: formData
-        }
-      );
+      const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
+        method: "POST",
+        body: formData
+      });
 
       const data = await res.json();
 

@@ -26,7 +26,9 @@ export default function BlogDetails(ctx) {
 
   useEffect(() => {
     async function fetchComments() {
-      const res = await fetch(`http://localhost:3000/api/comment/${ctx.params.id}`, { cache: "no-store" });
+      const res = await fetch(`nextjs-blog-3r517no3p-tyestanley.vercel.app/api/comment/${ctx.params.id}`, {
+        cache: "no-store"
+      });
       const comments = await res.json();
 
       setComments(comments);
@@ -36,7 +38,9 @@ export default function BlogDetails(ctx) {
 
   useEffect(() => {
     async function fetchBlog() {
-      const res = await fetch(`http://localhost:3000/api/blog/${ctx.params.id}`, { cache: "no-store" });
+      const res = await fetch(`nextjs-blog-3r517no3p-tyestanley.vercel.app/api/blog/${ctx.params.id}`, {
+        cache: "no-store"
+      });
       const blog = await res.json();
 
       setBlogDetails(blog);
@@ -51,7 +55,7 @@ export default function BlogDetails(ctx) {
       const confirmModal = confirm("Are you sure you want to delete this blog?");
 
       if (confirmModal) {
-        const res = await fetch(`http://localhost:3000/api/blog/${ctx.params.id}`, {
+        const res = await fetch(`nextjs-blog-3r517no3p-tyestanley.vercel.app/api/blog/${ctx.params.id}`, {
           headers: {
             "Authorization": `Bearer ${session?.user?.token}`
           },
@@ -69,7 +73,7 @@ export default function BlogDetails(ctx) {
 
   async function handleLike() {
     try {
-      const res = await fetch(`http://localhost:3000/api/blog/${ctx.params.id}/like`, {
+      const res = await fetch(`nextjs-blog-3r517no3p-tyestanley.vercel.app/api/blog/${ctx.params.id}/like`, {
         headers: {
           "Authorization": `Bearer ${session?.user?.accessToken}`
         },
@@ -103,7 +107,7 @@ export default function BlogDetails(ctx) {
         text: commentText
       };
 
-      const res = await fetch("http://localhost:3000/api/comment", {
+      const res = await fetch("nextjs-blog-3r517no3p-tyestanley.vercel.app/api/comment", {
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${session?.user?.accessToken}`

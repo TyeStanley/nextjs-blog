@@ -12,7 +12,7 @@ export default function Comment({ comment, setComments }) {
 
   async function handleDeleteComment() {
     try {
-      await fetch(`http://localhost:3000/api/comment/${comment?._id}`, {
+      await fetch(`nextjs-blog-3r517no3p-tyestanley.vercel.app/api/comment/${comment?._id}`, {
         headers: {
           "Authorization": `Bearer ${token}`
         },
