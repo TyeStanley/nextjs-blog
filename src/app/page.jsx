@@ -1,3 +1,4 @@
+"use client";
 import BlogCard from "@/components/blogCard/BlogCard";
 import { blogs } from "@/lib/data";
 import Image from "next/image";
