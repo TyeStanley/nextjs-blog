@@ -5,7 +5,7 @@ export async function fetchBlogs() {
   try {
     const res = await fetch("https://nextjs-blog-henna-zeta-83.vercel.app/api/blog", { cache: "no-store" });
 
-    if (res.ok) return res.json();
+    return res.json();
   } catch (error) {
     console.log(error);
   }
