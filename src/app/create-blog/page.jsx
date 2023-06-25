@@ -38,7 +38,7 @@ export default function CreateBlog() {
     try {
       const imageUrl = await uploadImage();
 
-      const res = await fetch(`https://nextjs-blog-tyestanley.vercel.app/api/blog`, {
+      const res = await fetch(`https://nextjs-blog-henna-zeta-83.vercel.app/api/blog`, {
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${session?.user?.accessToken}`

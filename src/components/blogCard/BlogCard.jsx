@@ -18,7 +18,7 @@ export default function BlogCard({ blog: { title, desc, imageUrl, likes, authorI
 
   async function handleLike() {
     try {
-      const res = await fetch(`https://nextjs-blog-tyestanley.vercel.app/api/blog/${_id}/like`, {
+      const res = await fetch(`https://nextjs-blog-henna-zeta-83.vercel.app/api/blog/${_id}/like`, {
         headers: {
           "Authorization": `Bearer ${session?.user?.accessToken}`
         },

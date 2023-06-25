@@ -25,7 +25,7 @@ export default function Register() {
     }
 
     try {
-      const res = await fetch("https://nextjs-blog-tyestanley.vercel.app/api/register", {
+      const res = await fetch("https://nextjs-blog-henna-zeta-83.vercel.app/api/register", {
         headers: {
           "Content-Type": "application/json"
         },

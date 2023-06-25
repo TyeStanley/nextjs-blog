@@ -6,7 +6,7 @@ import classes from "./page.module.css";
 
 export async function fetchBlogs() {
   try {
-    const res = await fetch("https://nextjs-blog-tyestanley.vercel.app/api/blog", { cache: "no-store" });
+    const res = await fetch("https://nextjs-blog-henna-zeta-83.vercel.app/api/blog", { cache: "no-store" });
 
     if (res.ok) return res.json();
   } catch (error) {
